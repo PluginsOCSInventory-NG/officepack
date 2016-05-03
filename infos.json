@@ -1,1 +1,9 @@
-HELLO WORLD
+{
+  "author" : ["Guillaume PROTET", "Gilles DUBOIS"],
+  "contributor" : [],
+  "supportedAgent" : ["Windows"],
+  "description" : {
+    "fr" : "Remonte les clés microsoft office",
+    "en" : "Retrieve microsoft office keys"
+  }
+}
