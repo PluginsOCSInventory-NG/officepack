@@ -27,7 +27,7 @@ $object = new plugins;
 $object -> del_cd_entry("officepack");
 $object -> del_menu ("officepack","14000","Office Key Management","plugins");
 
-$object -> sql_query("DROP TABLE `officepack_sku` , `officepack_lang` , `officepack_type` , `officepack_version` , `officepack`;");
+$object -> sql_query("DROP TABLE IF EXISTS `officepack_sku` , `officepack_lang` , `officepack_type` , `officepack_version` , `officepack`;");
 
 }
 
