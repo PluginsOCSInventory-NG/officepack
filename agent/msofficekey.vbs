@@ -6,7 +6,7 @@ On Error Resume Next
 
 Const HKEY_LOCAL_MACHINE = &H80000002
 
-Dim aOffID(4,1)
+Dim aOffID(5,1)
 aOffID(0,0) = "XP"
 aOffID(0,1) = "10.0"
 aOffID(1,0) = "2003"
@@ -17,6 +17,8 @@ aOffID(3,0) = "2010"
 aOffID(3,1) = "14.0"
 aOffID(4,0) = "2013"
 aOffID(4,1) = "15.0"
+aOffID(5,0) = "2016"
+aOffID(5.1) = "16.0"
 
 Set oCtx = CreateObject("WbemScripting.SWbemNamedValueSet")
 oCtx.Add "__ProviderArchitecture", 64
@@ -110,7 +112,7 @@ Sub schKey(regKey, likeOS)
     End If
     oNote = oEdit
 
-    If IsNull(oProd) And (oVer = "2010" Or oVer = "2013") Then
+    If IsNull(oProd) And (oVer = "2010" Or oVer = "2013" Or oVer = "2016") Then
       kEdit = UCase(oEdit)
       If Mid(oGUID,11,4) = "003D" Then kEdit = "SingleImage"
       oReg.GetStringValue HKEY_LOCAL_MACHINE, "Software\" & wow & "Microsoft\Windows\CurrentVersion\Uninstall\Office" & Left(aOffID(a,1),2) & "." & kEdit, "DisplayName", oProd
