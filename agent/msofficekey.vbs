@@ -41,6 +41,8 @@ For a = LBound(aOffID, 1) To UBound(aOffID, 1)
   schKey "SOFTWARE\Microsoft\Office\" & aOffID(a,1) & "\Registration", true
 Next
 
+getOffice16Infos
+
 Sub schKey97(regKey)
   oReg.GetStringValue HKEY_LOCAL_MACHINE, regKey & "Office\8.0", "BinDirPath", oDir97
   If IsNull(oDir97) Then Exit Sub
@@ -158,6 +160,88 @@ Sub writeXML(oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote)
   "<INSTALL>" & oInstall & "</INSTALL>" & vbCrLf & _
   "<NOTE>" & oNote & "</NOTE>" & vbCrLf & _
   "</OFFICEPACK>"
+End Sub
+
+Sub getOffice16Infos
+	Dim WshShell, oExec
+	Dim mTab
+	Dim key, value
+	Set WshShell = WScript.CreateObject("WScript.Shell")
+
+	result = WshShell.Run("cmd /c cscript ""C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS"" /dstatus > C:\output.txt", 0, true)
+	' Debug : if 32 bits version available ?
+	' WScript.Echo result
+
+	' If file not there command throw an error and return is 1 and abover
+	if result > 0 then
+		' Try with the 64 bits version if available
+		result = WshShell.Run("cmd /c cscript ""C:\Program Files\Microsoft Office\Office16\OSPP.VBS"" /dstatus > C:\output.txt", 0, true)
+		' Debug : if 64 bits version available ?
+		' WScript.Echo result
+	end if
+
+	' Result = 0 if successfully executed
+	if result = 0 then
+		Set fso  = CreateObject("Scripting.FileSystemObject")
+		Set file = fso.OpenTextFile("C:\output.txt", 1)
+		'strData = file.ReadLine
+		
+		Do Until file.AtEndOfStream
+			' Debug : echo each line 
+			' WScript.echo file.ReadLine
+			
+			str = file.ReadLine
+			' Debug : Show string before split 
+			' WScript.Echo str
+			
+			mTab = Split(str, ":")
+			arrCount = uBound(mTab) + 1
+			
+			if arrCount > 1 then
+				key = mTab(0)
+				value = mTab(1)
+				
+				Select Case key
+				Case "PRODUCT ID"
+					oProdID = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oProdId = " & oProdID
+				Case "SKU ID"
+					oGUID = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oGUID = " & oGUID
+				Case "LICENSE NAME"
+					oProd = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oProd = " & oProd
+				Case "LICENSE DESCRIPTION"
+					oVer = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oVer = " & oVer
+				Case "ERROR DESCRIPTION"
+					oNote = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oNote = " & oNote
+				Case "Last 5 characters of installed product key"
+					oKey = "XXXXX-XXXXX-XXXXX-XXXXX-" & mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oKey = " & oKey
+				End Select
+			End If
+
+		Loop
+		
+		oInstall = 1
+		oBit = 1
+		
+		file.Close
+		
+		writeXML oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote
+		
+	end if
+	
+	
+	
 End Sub
 
 Function decodeKey(iValues)
