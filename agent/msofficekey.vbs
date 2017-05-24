@@ -167,15 +167,17 @@ Sub getOffice16Infos
 	Dim mTab
 	Dim key, value
 	Set WshShell = WScript.CreateObject("WScript.Shell")
+    Set WshShellObj = WScript.CreateObject("WScript.Shell") 
+    Set WshProcessEnv = WshShellObj.Environment("Process") 
 
-	result = WshShell.Run("cmd /c cscript ""C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS"" /dstatus > C:\output.txt", 0, true)
+	result = WshShell.Run("cmd /c cscript ""C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS"" /dstatus > %USERPROFILE%\output.txt", 0, true)
 	' Debug : if 32 bits version available ?
-	' WScript.Echo result
+	' wscript.echo result
 
 	' If file not there command throw an error and return is 1 and abover
 	if result > 0 then
 		' Try with the 64 bits version if available
-		result = WshShell.Run("cmd /c cscript ""C:\Program Files\Microsoft Office\Office16\OSPP.VBS"" /dstatus > C:\output.txt", 0, true)
+		result = WshShell.Run("cmd /c cscript ""C:\Program Files\Microsoft Office\Office16\OSPP.VBS"" /dstatus > %USERPROFILE%\output.txt", 0, true)
 		' Debug : if 64 bits version available ?
 		' WScript.Echo result
 	end if
@@ -183,7 +185,7 @@ Sub getOffice16Infos
 	' Result = 0 if successfully executed
 	if result = 0 then
 		Set fso  = CreateObject("Scripting.FileSystemObject")
-		Set file = fso.OpenTextFile("C:\output.txt", 1)
+		Set file = fso.OpenTextFile("C:\Users\" & WshProcessEnv("USERNAME") & "\output.txt", 1)
 		'strData = file.ReadLine
 		
 		Do Until file.AtEndOfStream
@@ -209,7 +211,7 @@ Sub getOffice16Infos
 				Case "SKU ID"
 					oGUID = mTab(1)
 					' Debug : echo office data
-					' WScript.echo "oGUID = " & oGUID
+				    ' WScript.echo "oGUID = " & oGUID
 				Case "LICENSE NAME"
 					oProd = mTab(1)
 					' Debug : echo office data
@@ -225,30 +227,33 @@ Sub getOffice16Infos
 				Case "Last 5 characters of installed product key"
 					oKey = "XXXXX-XXXXX-XXXXX-XXXXX-" & mTab(1)
 					' Debug : echo office data
-					' WScript.echo "oKey = " & oKey
-				End Select
-			End If
-
-		Loop
-		
-		oInstall = 1
-		oBit = 1
-		
-		file.Close
-		
-		writeXML oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote
-		
-	end if
-	
-	
-	
-End Sub
-
-Function decodeKey(iValues)
-  Dim arrDPID, foundKeys
-  arrDPID = Array()
-  foundKeys = Array()
-
+					' WScript.echo "oKey = " & oKey                                
+				End Select                                                         
+			End If                                                                 
+                                                                                   
+		Loop                                                                       
+		                                                                           
+		oInstall = 1                                                               
+		oBit = 1                                                                   
+		                                                                           
+		file.Close                                                                 
+		                                                                           
+        'Check if Office is 365                                                    
+        if InStr(oProd, "O365") > 0 then                                           
+            oVer = "Office 365"                                                  
+            oProd = Right(oProd, len(oProd)-11)                                    
+        end if                                                                     
+                                                                                   
+		writeXML oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote                 
+	end if                                                                         
+	                                                                               
+End Sub                                                                            
+                                                                                   
+Function decodeKey(iValues)                                                        
+  Dim arrDPID, foundKeys                                                           
+  arrDPID = Array()                                                                
+  foundKeys = Array()                                                              
+                                                                                   
   Select Case (UBound(iValues))
     Case 255:  ' 2000
       range = Array(52,66)
