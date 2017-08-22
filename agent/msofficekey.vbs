@@ -8,12 +8,13 @@
 ' Contributor :	Stéphane PAUTREL (acb78.com)
 '----------------------------------------------------------
 ' OS checked [X] on	32b	64b	(Professionnal edition)
-'	Windows XP		[ ]	[ ]
-'	Windows 7		[X]	[X]
-'	Windows 8.1		[X]	[X]	
-'	Windows 10		[X]	[X]
+'	Windows XP	[ ]	[ ]
+'	Windows Vista	[X]	[X]
+'	Windows 7	[X]	[X]
+'	Windows 8.1	[X]	[X]	
+'	Windows 10	[X]	[X]
 ' ---------------------------------------------------------
-' NOTE : No checked on Windows Vista and Windows 8
+' NOTE : No checked on Windows 8
 ' Included : Office 2016 and 365 versions
 ' ---------------------------------------------------------
 On Error Resume Next
