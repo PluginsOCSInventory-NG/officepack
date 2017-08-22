@@ -8,7 +8,7 @@
 ' Contributor :	Stéphane PAUTREL (acb78.com)
 '----------------------------------------------------------
 ' OS checked [X] on	32b	64b	(Professionnal edition)
-'	Windows XP	[ ]	[ ]
+'	Windows XP	[X]	[ ]
 '	Windows Vista	[X]	[X]
 '	Windows 7	[X]	[X]
 '	Windows 8.1	[X]	[X]	
