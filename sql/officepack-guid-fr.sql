@@ -7,8 +7,8 @@
 --
 DROP TABLE IF EXISTS `officepack_sku`;
 CREATE TABLE IF NOT EXISTS `officepack_sku` (
-  `VERSION` varchar(255) DEFAULT NULL,
-  `REF_ID` varchar(255) DEFAULT NULL,
+  `VERSION` varchar(109) DEFAULT NULL,
+  `REF_ID` varchar(127) DEFAULT NULL,
   `PRODUCT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`VERSION`,`REF_ID`)
 ) ENGINE=INNODB;
@@ -241,7 +241,7 @@ INSERT INTO `officepack_sku` VALUES ('2013','012B','Microsoft Lync 2013');
 --
 DROP TABLE IF EXISTS `officepack_lang`;
 CREATE TABLE IF NOT EXISTS `officepack_lang` (
-  `LCID` varchar(255) DEFAULT NULL,
+  `LCID` varchar(190) DEFAULT NULL,
   `LANG` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`LCID`)
 ) ENGINE=INNODB;
@@ -292,7 +292,7 @@ INSERT INTO `officepack_lang` VALUES ('0422','Ukrainien');
 --
 DROP TABLE IF EXISTS `officepack_type`;
 CREATE TABLE IF NOT EXISTS `officepack_type` (
-  `REF_ID` varchar(255) DEFAULT NULL,
+  `REF_ID` varchar(127) DEFAULT NULL,
   `TYPE_VERSION` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`REF_ID`)
 ) ENGINE=INNODB;
@@ -308,7 +308,7 @@ INSERT INTO `officepack_type` VALUES ('5','Téléchargement');
 --
 DROP TABLE IF EXISTS `officepack_version`;
 CREATE TABLE IF NOT EXISTS `officepack_version` (
-  `REF_ID` varchar(255) DEFAULT NULL,
+  `REF_ID` varchar(127) DEFAULT NULL,
   `VERSION` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`REF_ID`)
 ) ENGINE=INNODB;
