@@ -1,7 +1,25 @@
-'' msofficekey 2.2.3 (13/02/2013)
-'' Plugin for OCS Inventory NG 2.x
-'' Creative Commons BY-NC-SA 3.0
-'' Nicolas DEROUET (nicolas.derouet[gmail]com)
+'----------------------------------------------------------
+' Plugin for OCS Inventory NG 2.x
+' Script :		Retrieve Microsoft Office informations
+' Version :		2.24
+' Date :		14/06/2017
+' Author :		Creative Commons BY-NC-SA 3.0
+' Author :		Nicolas DEROUET (nicolas.derouet[gmail]com)
+' Contributor :	Stéphane PAUTREL (acb78.com)
+'----------------------------------------------------------
+' OS checked [X] on	32b	64b	(Professionnal edition)
+'	Windows XP	[X]
+'	Windows Vista	[X]	[X]
+'	Windows 7	[X]	[X]
+'	Windows 8.1	[X]	[X]	
+'	Windows 10	[X]	[X]
+'	Windows 2k8R2		[ ]
+'	Windows 2k12R2		[ ]
+'	Windows 2k16		[ ]
+' ---------------------------------------------------------
+' NOTE : No checked on Windows 8
+' Included : Office 2016 and 365 versions
+' ---------------------------------------------------------
 On Error Resume Next
 
 Const HKEY_LOCAL_MACHINE = &H80000002
@@ -230,30 +248,31 @@ Sub getOffice16Infos
 					' WScript.echo "oKey = " & oKey                                
 				End Select                                                         
 			End If                                                                 
-                                                                                   
-		Loop                                                                       
-		                                                                           
+
+		Loop
+
 		oInstall = 1                                                               
-		oBit = 1                                                                   
-		                                                                           
+		oBit = 1
+
 		file.Close                                                                 
-		                                                                           
+
         'Check if Office is 365                                                    
-        if InStr(oProd, "O365") > 0 then                                           
-            oVer = "Office 365"                                                  
-            oProd = Right(oProd, len(oProd)-11)                                    
-        end if                                                                     
-                                                                                   
+        If InStr(oProd, "O365") > 0 Then                                           
+            oVer = "365"                                                  
+            oProd = Right(oProd, len(oProd)-11)
+			If oProd = " Office16O365BusinessR_Subscription edition" Then oProd = "Microsoft Office Business Subscription Edition 365" : End If
+			If oProd = " Office16O365BusinessR_Grace edition" Then oProd = "Microsoft Office Business Grace Edition 365" : End If
+        End if                                                                     
 		writeXML oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote                 
-	end if                                                                         
-	                                                                               
+	End If                                                                         
+
 End Sub                                                                            
-                                                                                   
+
 Function decodeKey(iValues)                                                        
   Dim arrDPID, foundKeys                                                           
-  arrDPID = Array()                                                                
+  arrDPID = Array()
   foundKeys = Array()                                                              
-                                                                                   
+
   Select Case (UBound(iValues))
     Case 255:  ' 2000
       range = Array(52,66)
