@@ -2,7 +2,7 @@
 function plugin_version_officepack()
 {
 return array('name' => 'officepack',
-'version' => '1.0',
+'version' => '2.0',
 'author'=> 'Gilles Dubois, Nicolas Derouet',
 'license' => 'GPLv2',
 'verMinOcs' => '2.2');
