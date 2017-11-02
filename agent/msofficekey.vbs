@@ -1,4 +1,4 @@
-'----------------------------------------------------------
+,'----------------------------------------------------------
 ' Plugin for OCS Inventory NG 2.x
 ' Script :		Retrieve Microsoft Office informations
 ' Version :		2.24
@@ -13,9 +13,9 @@
 '	Windows 7	[X]	[X]
 '	Windows 8.1	[X]	[X]	
 '	Windows 10	[X]	[X]
-'	Windows 2k8R2		[ ]
-'	Windows 2k12R2		[ ]
-'	Windows 2k16		[ ]
+'	Windows 2k8R2		[X]
+'	Windows 2k12R2		[X]
+'	Windows 2k16		[X]
 ' ---------------------------------------------------------
 ' NOTE : No checked on Windows 8
 ' Included : Office 2016 and 365 versions
@@ -36,7 +36,7 @@ aOffID(3,1) = "14.0"
 aOffID(4,0) = "2013"
 aOffID(4,1) = "15.0"
 aOffID(5,0) = "2016"
-aOffID(5.1) = "16.0"
+aOffID(5,1) = "16.0"
 
 Set oCtx = CreateObject("WbemScripting.SWbemNamedValueSet")
 oCtx.Add "__ProviderArchitecture", 64
