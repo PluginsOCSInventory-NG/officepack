@@ -1,4 +1,4 @@
-,'----------------------------------------------------------
+'----------------------------------------------------------
 ' Plugin for OCS Inventory NG 2.x
 ' Script :		Retrieve Microsoft Office informations
 ' Version :		2.24
