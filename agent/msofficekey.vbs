@@ -59,6 +59,7 @@ For a = LBound(aOffID, 1) To UBound(aOffID, 1)
   schKey "SOFTWARE\Microsoft\Office\" & aOffID(a,1) & "\Registration", true
 Next
 
+getOffice15Infos
 getOffice16Infos
 
 Sub schKey97(regKey)
@@ -180,10 +181,102 @@ Sub writeXML(oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote)
   "</OFFICEPACK>"
 End Sub
 
+Sub getOffice15Infos
+	Dim WshShell, oExec
+	Dim mTab
+	Dim key, value
+	Dim path
+	Set WshShell = WScript.CreateObject("WScript.Shell")
+    Set WshShellObj = WScript.CreateObject("WScript.Shell") 
+    Set WshProcessEnv = WshShellObj.Environment("Process") 
+
+	result = WshShell.Run("cmd /c cscript ""C:\Program Files (x86)\Microsoft Office\Office15\OSPP.VBS"" /dstatus > %USERPROFILE%\output.txt", 0, true)
+	' Debug : if 32 bits version available ?
+	' wscript.echo result
+
+	' If file not there command throw an error and return is 1 and abover
+	if result > 0 then
+		' Try with the 64 bits version if available
+		result = WshShell.Run("cmd /c cscript ""C:\Program Files\Microsoft Office\Office15\OSPP.VBS"" /dstatus > %USERPROFILE%\output.txt", 0, true)
+		' Debug : if 64 bits version available ?
+		' WScript.Echo result
+	end If
+
+	' Result = 0 if successfully executed
+	if result = 0 Then
+		Set fso  = CreateObject("Scripting.FileSystemObject")
+		' The USERNAME env var doesn't take the domain part into account which leads to a wrong directory which cannot be read
+		path = WshProcessEnv("USERPROFILE") & "\output.txt"
+		Set file = fso.OpenTextFile(path, 1)
+		'strData = file.ReadLine
+		
+		Do Until file.AtEndOfStream
+			' Debug : echo each line 
+			' WScript.echo file.ReadLine
+			
+			str = file.ReadLine
+			' Debug : Show string before split 
+			' WScript.Echo str
+			
+			mTab = Split(str, ":")
+			arrCount = uBound(mTab) + 1
+			
+			If arrCount > 1 then
+				key = mTab(0)
+				value = mTab(1)
+				
+				Select Case key
+				Case "PRODUCT ID"
+					oProdID = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oProdId = " & oProdID
+				Case "SKU ID"
+					oGUID = mTab(1)
+					' Debug : echo office data
+				    ' WScript.echo "oGUID = " & oGUID
+				Case "LICENSE NAME"
+					oProd = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oProd = " & oProd
+				Case "LICENSE DESCRIPTION"
+					oVer = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oVer = " & oVer
+				Case "ERROR DESCRIPTION"
+					oNote = mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oNote = " & oNote
+				Case "Last 5 characters of installed product key"
+					oKey = "XXXXX-XXXXX-XXXXX-XXXXX-" & mTab(1)
+					' Debug : echo office data
+					' WScript.echo "oKey = " & oKey                                
+				End Select                                                         
+			End If                                                                 
+
+		Loop
+
+		oInstall = 1                                                               
+		oBit = 1
+
+		file.Close                                                                 
+
+        'Check if Office is 365                                                    
+        If InStr(oProd, "O365") > 0 Then                                           
+            oVer = "365"                                                  
+            oProd = Right(oProd, len(oProd)-11)
+			If oProd = " Office15O365BusinessR_Subscription edition" Then oProd = "Microsoft Office Business Subscription Edition 365" : End If
+			If oProd = " Office15O365BusinessR_Grace edition" Then oProd = "Microsoft Office Business Grace Edition 365" : End If
+        End if                                                                     
+		writeXML oVer,oProd,oProdID,oBit,oGUID,oInstall,oKey,oNote                 
+	End If                                                                         
+
+End Sub 
+
 Sub getOffice16Infos
 	Dim WshShell, oExec
 	Dim mTab
 	Dim key, value
+	Dim path
 	Set WshShell = WScript.CreateObject("WScript.Shell")
     Set WshShellObj = WScript.CreateObject("WScript.Shell") 
     Set WshProcessEnv = WshShellObj.Environment("Process") 
@@ -198,12 +291,14 @@ Sub getOffice16Infos
 		result = WshShell.Run("cmd /c cscript ""C:\Program Files\Microsoft Office\Office16\OSPP.VBS"" /dstatus > %USERPROFILE%\output.txt", 0, true)
 		' Debug : if 64 bits version available ?
 		' WScript.Echo result
-	end if
+	end If
 
 	' Result = 0 if successfully executed
 	if result = 0 then
 		Set fso  = CreateObject("Scripting.FileSystemObject")
-		Set file = fso.OpenTextFile("C:\Users\" & WshProcessEnv("USERNAME") & "\output.txt", 1)
+		' The USERNAME env var doesn't take the domain part into account which leads to a wrong directory which cannot be read
+		path = WshProcessEnv("USERPROFILE") & "\output.txt"
+		Set file = fso.OpenTextFile(path, 1)
 		'strData = file.ReadLine
 		
 		Do Until file.AtEndOfStream
@@ -217,7 +312,7 @@ Sub getOffice16Infos
 			mTab = Split(str, ":")
 			arrCount = uBound(mTab) + 1
 			
-			if arrCount > 1 then
+			If arrCount > 1 then
 				key = mTab(0)
 				value = mTab(1)
 				
