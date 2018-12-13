@@ -1,34 +1,31 @@
 <?php
-function plugin_version_officepack()
+
+/**
+ * This function is called on installation and is used to create database schema for the plugin
+ */
+function extension_install_officepack()
 {
-return array('name' => 'officepack',
-'version' => '2.0',
-'author'=> 'Gilles Dubois, Nicolas Derouet',
-'license' => 'GPLv2',
-'verMinOcs' => '2.2');
+    $commonObject = new ExtensionCommon;
+
+    // Officepack table creation
+
+    include 'sql/officepack.php';
+    include 'sql/officepack-guid-fr.php';
 }
 
-function plugin_init_officepack()
+/**
+ * This function is called on removal and is used to destroy database schema for the plugin
+ */
+function extension_delete_officepack()
 {
-$object = new plugins;
-$object -> add_cd_entry("officepack","software");
-$object -> add_menu ("officepack","14000","officepack","Office Key Management","plugins");
-
-// Officepack table creation
-
-include 'sql/officepack.php';
-include 'sql/officepack-guid-fr.php';
-
+    $commonObject = new ExtensionCommon;
+    $commonObject -> sqlQuery("DROP TABLE IF EXISTS `officepack_sku` , `officepack_lang` , `officepack_type` , `officepack_version` , `officepack`;");
 }
 
-function plugin_delete_officepack()
+/**
+ * This function is called on plugin upgrade
+ */
+function extension_upgrade_officepack()
 {
-$object = new plugins;
-$object -> del_cd_entry("officepack");
-$object -> del_menu ("officepack","14000","Office Key Management","plugins");
-
-$object -> sql_query("DROP TABLE IF EXISTS `officepack_sku` , `officepack_lang` , `officepack_type` , `officepack_version` , `officepack`;");
 
 }
-
-?>

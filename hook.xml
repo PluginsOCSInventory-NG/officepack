@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hookstore>
+    <hook type="lang">
+        <value>en_GB</value>
+        <value>fr_FR</value>
+    </hook>
+    <hook type="submenu">
+        <mainmenuidentifier>ms_extension</mainmenuidentifier>
+        <identifier>ms_officepack</identifier>
+        <translation>23001</translation>
+    </hook>
+    <hook type="cdentry">
+        <identifier>cd_officepack</identifier>
+        <translation>23000</translation>
+        <category>software</category>
+        <available>officepack</available>
+    </hook>
+</hookstore>
