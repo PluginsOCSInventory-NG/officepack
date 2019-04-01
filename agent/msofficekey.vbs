@@ -236,6 +236,7 @@ Sub getOfficeOSPPInfos(version)
 					' Debug : echo office data
 					' WScript.echo "oProdId = " & oProdID
 				Case "SKU ID"
+					writeProduct = 1
 					oGUID = mTab(1)
 					' Debug : echo office data
 				    ' WScript.echo "oGUID = " & oGUID
