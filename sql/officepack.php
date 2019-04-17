@@ -1,7 +1,7 @@
 <?php
 
 // Create table
-$object -> sql_query("CREATE TABLE IF NOT EXISTS `officepack` (
+$commonObject -> sqlQuery("CREATE TABLE IF NOT EXISTS `officepack` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `HARDWARE_ID` int(11) NOT NULL,
   `OFFICEVERSION` varchar(255) DEFAULT NULL,
@@ -14,7 +14,7 @@ $object -> sql_query("CREATE TABLE IF NOT EXISTS `officepack` (
 )  ENGINE=INNODB ;");
 
 //Alter data table
-$object -> sql_query("
+$commonObject -> sqlQuery("
 		ALTER TABLE `officepack` ADD COLUMN `GUID` varchar(255) DEFAULT NULL AFTER `OFFICEKEY`;
 		ALTER TABLE `officepack` ADD COLUMN `INSTALL` int(11) DEFAULT NULL AFTER `GUID`;");
 

@@ -1,13 +1,13 @@
 <?php
-$object -> sql_query("DROP TABLE IF EXISTS `officepack_sku`;
+$commonObject -> sqlQuery("DROP TABLE IF EXISTS `officepack_sku`;
 CREATE TABLE IF NOT EXISTS `officepack_sku` (
   `VERSION` varchar(255) NOT NULL,
   `REF_ID` varchar(255) NOT NULL,
   `PRODUCT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`VERSION`,`REF_ID`)
 ) ENGINE=INNODB;");
-	
-$object -> sql_query("INSERT INTO `officepack_sku` VALUES ('2000','00','Microsoft Office 2000 Premium Edition CD1');
+
+$commonObject -> sqlQuery("INSERT INTO `officepack_sku` VALUES ('2000','00','Microsoft Office 2000 Premium Edition CD1');
 INSERT INTO `officepack_sku` VALUES ('2000','01','Microsoft Office 2000 Professional Edition');
 INSERT INTO `officepack_sku` VALUES ('2000','02','Microsoft Office 2000 Standard Edition');
 INSERT INTO `officepack_sku` VALUES ('2000','03','Microsoft Office 2000 Small Business Edition');
@@ -211,15 +211,15 @@ INSERT INTO `officepack_sku` VALUES ('2013','00BA','Microsoft Office SharePoint 
 INSERT INTO `officepack_sku` VALUES ('2013','110D','Microsoft Office SharePoint Server 2013');
 INSERT INTO `officepack_sku` VALUES ('2013','110F','Microsoft Project Server 2013');
 INSERT INTO `officepack_sku` VALUES ('2013','012B','Microsoft Lync 2013');");
-		
-$object -> sql_query("DROP TABLE IF EXISTS `officepack_lang`;
+
+$commonObject -> sqlQuery("DROP TABLE IF EXISTS `officepack_lang`;
 CREATE TABLE IF NOT EXISTS `officepack_lang` (
   `LCID` varchar(255) NOT NULL,
   `LANG` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`LCID`)
 ) ENGINE=INNODB;");
-		
-$object -> sql_query("INSERT INTO `officepack_lang` VALUES ('0401','Arabe');
+
+$commonObject -> sqlQuery("INSERT INTO `officepack_lang` VALUES ('0401','Arabe');
 INSERT INTO `officepack_lang` VALUES ('0402','Bulgare');
 INSERT INTO `officepack_lang` VALUES ('0804','Chinois (simplifié)');
 INSERT INTO `officepack_lang` VALUES ('0404','Chinois');
@@ -257,26 +257,26 @@ INSERT INTO `officepack_lang` VALUES ('041E','Thaï');
 INSERT INTO `officepack_lang` VALUES ('041F','Turc');
 INSERT INTO `officepack_lang` VALUES ('0422','Ukrainien');");
 
-$object -> sql_query("DROP TABLE IF EXISTS `officepack_type`;
+$commonObject -> sqlQuery("DROP TABLE IF EXISTS `officepack_type`;
 CREATE TABLE IF NOT EXISTS `officepack_type` (
   `REF_ID` varchar(255) NOT NULL,
   `TYPE_VERSION` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`REF_ID`)
 ) ENGINE=INNODB;");
 
-$object -> sql_query("INSERT INTO `officepack_type` VALUES ('0','Licence en volume');
+$commonObject -> sqlQuery("INSERT INTO `officepack_type` VALUES ('0','Licence en volume');
 INSERT INTO `officepack_type` VALUES ('1','Vente au détail / OEM');
 INSERT INTO `officepack_type` VALUES ('2','Évaluation');
 INSERT INTO `officepack_type` VALUES ('5','Téléchargement');");
 
-$object -> sql_query("DROP TABLE IF EXISTS `officepack_version`;
+$commonObject -> sqlQuery("DROP TABLE IF EXISTS `officepack_version`;
 CREATE TABLE IF NOT EXISTS `officepack_version` (
   `REF_ID` varchar(255) NOT NULL,
   `VERSION` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`REF_ID`)
 ) ENGINE=INNODB;");
 
-$object -> sql_query("INSERT INTO `officepack_version` VALUES ('0','Version avant Beta 1');
+$commonObject -> sqlQuery("INSERT INTO `officepack_version` VALUES ('0','Version avant Beta 1');
 INSERT INTO `officepack_version` VALUES ('1','Beta 1');
 INSERT INTO `officepack_version` VALUES ('2','Beta 2');
 INSERT INTO `officepack_version` VALUES ('3','Version finale candidate 0 (RC0)');
