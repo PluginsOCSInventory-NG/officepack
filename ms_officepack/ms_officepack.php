@@ -70,7 +70,16 @@ if(!isset($protectedGet['value'])){
             'Office Version' => 'OFFICEVERSION',
             'Number' => 'NUMBER',
         );
-
+        
+        /*
+         * (Office Key Manager)
+         * EN : Access denied on the license key information page
+         * FR : Accès refusé sur la page d'information des clés de licence
+         *
+         * @!old : $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=officepack&value=";
+         * @!edit : $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=ms_officepack&value=";
+         */
+       
         // Create link to see al machines
         $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=officepack&value=";
         $tab_options['LIEN_CHAMP']['Number']="OFFICEVERSION";
