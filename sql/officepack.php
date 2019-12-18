@@ -9,13 +9,10 @@ $commonObject -> sqlQuery("CREATE TABLE IF NOT EXISTS `officepack` (
   `PRODUCTID` varchar(255) DEFAULT NULL,
   `TYPE` int(11) DEFAULT NULL,
   `OFFICEKEY` varchar(255) DEFAULT NULL,
+  `GUID` varchar(255) DEFAULT NULL,
+  `INSTALL` int(11) DEFAULT NULL,
   `NOTE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`,`HARDWARE_ID`)
 )  ENGINE=INNODB ;");
-
-//Alter data table
-$commonObject -> sqlQuery("
-		ALTER TABLE `officepack` ADD COLUMN `GUID` varchar(255) DEFAULT NULL AFTER `OFFICEKEY`;
-		ALTER TABLE `officepack` ADD COLUMN `INSTALL` int(11) DEFAULT NULL AFTER `GUID`;");
 
 ?>

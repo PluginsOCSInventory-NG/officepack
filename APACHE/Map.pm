@@ -13,7 +13,8 @@ package Apache::Ocsinventory::Plugins::Officepack::Map;
 use strict;
  
 use Apache::Ocsinventory::Map;
-#Plugin UPTIME
+
+#Plugin officepack
 $DATA_MAP{officepack} = {
 		mask => 0,
 		multi => 1,
@@ -23,14 +24,14 @@ $DATA_MAP{officepack} = {
 		writeDiff => 0,
 		cache => 0,
 		fields => {
-                        OFFICEKEY => {},
-                        OFFICEVERSION => {},
-                        PRODUCT => {},
-                        PRODUCTID => {},
-                        TYPE => {},
-                        GUID => {},
-                        INSTALL => {},
-                        NOTE => {},
+			OFFICEKEY => {},
+			OFFICEVERSION => {},
+			PRODUCT => {},
+			PRODUCTID => {},
+			TYPE => {},
+			GUID => {},
+			INSTALL => {},
+			NOTE => {}
 	}
 };
 1;
