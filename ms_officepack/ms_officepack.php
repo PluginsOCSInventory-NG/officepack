@@ -72,7 +72,7 @@ if(!isset($protectedGet['value'])){
         );
 
         // Create link to see al machines
-        $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=officepack&value=";
+        $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=ms_officepack&value=";
         $tab_options['LIEN_CHAMP']['Number']="OFFICEVERSION";
 
         $list_col_cant_del=$list_fields;
