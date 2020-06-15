@@ -39,12 +39,12 @@ if($list_old_info != ""){
 }
 
 // Start display page
-printEnTete("Office Key Manager");
+printEnTete($l->g(23001));
 $form_name="officekey";
 
 $data_on = array(
-    "1" => "Licenses number by version",
-    "2" => "Licenses by administrative data"
+    "1" => $l->g(23002),
+    "2" => $l->g(23003)
 );
 
 if(!isset($protectedPost['onglet'])){

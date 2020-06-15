@@ -1,2 +1,10 @@
 23000 Office Pack
 23001 Office Key Management
+23002 Nombre de licence par version
+23003 Nombre de licence par données administratives
+23004 Licences Office
+23005 Produit
+23006 Version office
+23007 Type
+23008 Clé
+

@@ -18,7 +18,7 @@
 	else{
 		$ajax=false;
 	}
-	print_item_header("Office Licences");
+	print_item_header($l->g(23004));
 	if (!isset($protectedPost['SHOW']))
 		$protectedPost['SHOW'] = 'NOSHOW';
 	$form_name="officepack";
@@ -27,10 +27,10 @@
 	$tab_options['form_name']=$form_name;
 	$tab_options['table_name']=$table_name;
 	echo open_form($form_name);
-	$list_fields=array( 'Product' => 'PRODUCT',
-	'Office Version' => 'OFFICEVERSION',
-	'Type' => 'TYPE',
-	'Office Key' => 'OFFICEKEY',
+	$list_fields=array( $l-g(23005) => 'PRODUCT',
+	$l->g(23006) => 'OFFICEVERSION',
+	$l->g(23007) => 'TYPE',
+	$l->g(23008) => 'OFFICEKEY',
 	);
 	$list_col_cant_del=$list_fields;
 	$default_fields= $list_fields;
