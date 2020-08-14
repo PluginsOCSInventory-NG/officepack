@@ -1,0 +1,17 @@
+language: php
+php:
+  - '5.6'
+  - '7.1'
+  - '7.3'
+
+before_script:
+  - sudo apt -y install jsonlint libxml2-utils
+  - if find . -name "*.php" -exec php -l {} \; | grep "Fatal error"; then exit 1; fi
+  - jsonlint-php infos.json
+  - xmllint --noout hook.xml
+
+script: exit 0
+
+branches:
+  only:
+    - master
