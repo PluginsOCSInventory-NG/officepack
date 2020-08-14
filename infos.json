@@ -1,7 +1,7 @@
 {
   "displayName" : "Office Pack",
-  "author" : ["Guillaume PROTET", "Gilles DUBOIS", "Stephane PAUTREL"],
-  "contributor" : [],
+  "author" : ["Guillaume PROTET"],
+  "contributor" : ["Gilles DUBOIS", "Stephane PAUTREL", "Charlène AUGER"],
   "supportedAgent" : ["Windows"],
   "version" : "3.3",
   "licence" : "GPLv2",
