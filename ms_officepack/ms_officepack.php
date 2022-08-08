@@ -45,7 +45,7 @@ $form_name="officekey";
 $data_on = array(
     "1" => $l->g(23002),
     "2" => $l->g(23003),
-    "3" => 'Device number by license'
+    "3" => $l->g(23009),
 );
 
 if(!isset($protectedPost['onglet'])){
