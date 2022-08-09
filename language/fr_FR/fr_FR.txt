@@ -7,4 +7,5 @@
 23006 Version office
 23007 Type
 23008 Clé
+23009 Nombre de machines par licence
 

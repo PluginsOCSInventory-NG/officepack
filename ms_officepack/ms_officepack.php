@@ -44,7 +44,8 @@ $form_name="officekey";
 
 $data_on = array(
     "1" => $l->g(23002),
-    "2" => $l->g(23003)
+    "2" => $l->g(23003),
+    "3" => $l->g(23009),
 );
 
 if(!isset($protectedPost['onglet'])){
@@ -80,7 +81,7 @@ if(!isset($protectedGet['value'])){
 
         ajaxtab_entete_fixe($list_fields,$default_fields,$tab_options,$list_col_cant_del);
 
-    }else{
+    }elseif ($protectedPost['onglet'] == 2){
 
         // select account info for sorting
         $account_info_list_sql = "Select ID, COMMENT from accountinfo_config WHERE ACCOUNT_TYPE = 'COMPUTERS'";
@@ -134,25 +135,53 @@ if(!isset($protectedGet['value'])){
         }
 
 
+    } elseif ($protectedPost['onglet'] == 3){
+        $sql = "SELECT OFFICEKEY,COUNT(*) as NUMBER FROM `officepack` GROUP BY OFFICEKEY";
+        $list_fields=array(
+            'Key' => 'OFFICEKEY',
+            'Number' => 'NUMBER',
+        );
+        $tab_options['LIEN_LBL']['Number']="index.php?".PAG_INDEX."=ms_officepack&value=&key=";
+        $tab_options['LIEN_CHAMP']['Number']="OFFICEKEY";
+        $list_col_cant_del=$list_fields;
+        $default_fields= $list_fields;
+        ajaxtab_entete_fixe($list_fields,$default_fields,$tab_options,$list_col_cant_del);
     }
 
 }else{
+    if (isset($protectedGet['key'])) {
+        // display all devices with this key
+        $key = $protectedGet['key'];
+        $sql = "SELECT h.NAME, h.USERID, h.DESCRIPTION, o.OFFICEKEY FROM hardware h INNER JOIN officepack o ON h.ID = o.HARDWARE_ID where o.OFFICEKEY = '$key' ";
 
-    $version = $protectedGet['value'];
-    $sql = "SELECT h.NAME, h.USERID, h.DESCRIPTION, o.OFFICEKEY FROM hardware h INNER JOIN officepack o ON h.ID = o.HARDWARE_ID where o.OFFICEVERSION = '$version' ";
+        $list_fields=array(
+            'Name' => 'h.NAME',
+            'User' => 'h.USERID',
+            'Description' => 'h.DESCRIPTION',
+            'Office Key' => 'o.OFFICEKEY',
+        );
 
-    $list_fields=array(
-        'Name' => 'h.NAME',
-        'User' => 'h.USERID',
-        'Description' => 'h.DESCRIPTION',
-        'Office Key' => 'o.OFFICEKEY',
-    );
+        $default_fields = $list_fields;
+        $list_col_cant_del = $list_fields;
 
-    $default_fields = $list_fields;
-    $list_col_cant_del = $list_fields;
+        ajaxtab_entete_fixe($list_fields,$default_fields,$tab_options,$list_col_cant_del);
 
-    ajaxtab_entete_fixe($list_fields,$default_fields,$tab_options,$list_col_cant_del);
+    } else {
+        $version = $protectedGet['value'];
+        $sql = "SELECT h.NAME, h.USERID, h.DESCRIPTION, o.OFFICEKEY FROM hardware h INNER JOIN officepack o ON h.ID = o.HARDWARE_ID where o.OFFICEVERSION = '$version' ";
 
+        $list_fields=array(
+            'Name' => 'h.NAME',
+            'User' => 'h.USERID',
+            'Description' => 'h.DESCRIPTION',
+            'Office Key' => 'o.OFFICEKEY',
+        );
+
+        $default_fields = $list_fields;
+        $list_col_cant_del = $list_fields;
+
+        ajaxtab_entete_fixe($list_fields,$default_fields,$tab_options,$list_col_cant_del);
+    }
 }
 
 echo close_form();

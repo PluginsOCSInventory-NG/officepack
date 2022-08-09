@@ -7,3 +7,4 @@
 23006 Office version
 23007 Type
 23008 Key
+23009 Device number by license
