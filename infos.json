@@ -1,9 +1,9 @@
 {
   "displayName" : "Office Pack",
   "author" : ["Guillaume PROTET"],
-  "contributor" : ["Gilles DUBOIS", "Stephane PAUTREL", "Charlène AUGER"],
+  "contributor" : ["Gilles DUBOIS", "Stephane PAUTREL", "Charlène AUGER", "Léa DROGUET"],
   "supportedAgent" : ["Windows"],
-  "version" : "3.3",
+  "version" : "3.4",
   "licence" : "GPLv2",
   "description" : {
     "fr" : "Remonte les clés Microsoft Office",
