@@ -199,17 +199,17 @@ Function schKey
     $oOfficeOSPPInfos = getOfficeOSPPInfos -version $aOSPPVersions[0]
     If ($oOfficeOSPPInfos.Length -ine 0)
     {
-        $oProdID = $oOfficeOSPPInfos['ProductID']
-        $oSKUID = $oOfficeOSPPInfos['SKUID']
-        If ($oOfficeOSPPInfos['ErrorDescription'])
+        $oProdID = $oOfficeOSPPInfos[0]['ProductID']
+        $oSKUID = $oOfficeOSPPInfos[0]['SKUID']
+        If ($oOfficeOSPPInfos[0]['ErrorDescription'])
         {
-            $oNote = $oOfficeOSPPInfos['ErrorDescription']
+            $oNote = $oOfficeOSPPInfos[0]['ErrorDescription']
         }
         Else
         {
             $oNote = ''
         }
-        $oKey = $oOfficeOSPPInfos['PartialProductKey']
+        $oKey = $oOfficeOSPPInfos[0]['PartialProductKey']
     }
     If ($oProdID.Length -eq 0)
     {
@@ -281,7 +281,7 @@ Function schKey
         $oOfficeOSPPInfos.Length -gt 0
     )
     {
-        $oProd = $oOfficeOSPPInfos['LicenseName']
+        $oProd = $oOfficeOSPPInfos[0]['LicenseName']
     }
     If ($oProd.Length -eq 0)
     {
