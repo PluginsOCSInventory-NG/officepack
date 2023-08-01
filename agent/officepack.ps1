@@ -199,17 +199,34 @@ Function schKey
     $oOfficeOSPPInfos = getOfficeOSPPInfos -version $aOSPPVersions[0]
     If ($oOfficeOSPPInfos.Length -ine 0)
     {
-        $oProdID = $oOfficeOSPPInfos[0]['ProductID']
-        $oSKUID = $oOfficeOSPPInfos[0]['SKUID']
-        If ($oOfficeOSPPInfos[0]['ErrorDescription'])
+        If ($oOfficeOSPPInfos[0].Length -gt 0)
         {
-            $oNote = $oOfficeOSPPInfos[0]['ErrorDescription']
+            $oProdID = $oOfficeOSPPInfos[0]['ProductID']
+            $oSKUID = $oOfficeOSPPInfos[0]['SKUID']
+            If ($oOfficeOSPPInfos[0]['ErrorDescription'])
+            {
+                $oNote = $oOfficeOSPPInfos[0]['ErrorDescription']
+            }
+            Else
+            {
+                $oNote = ''
+            }
+            $oKey = $oOfficeOSPPInfos[0]['PartialProductKey']
         }
         Else
         {
-            $oNote = ''
+            $oProdID = $oOfficeOSPPInfos['ProductID']
+            $oSKUID = $oOfficeOSPPInfos['SKUID']
+            If ($oOfficeOSPPInfos['ErrorDescription'])
+            {
+                $oNote = $oOfficeOSPPInfos['ErrorDescription']
+            }
+            Else
+            {
+                $oNote = ''
+            }
+            $oKey = $oOfficeOSPPInfos['PartialProductKey']
         }
-        $oKey = $oOfficeOSPPInfos[0]['PartialProductKey']
     }
     If ($oProdID.Length -eq 0)
     {
