@@ -8,3 +8,7 @@
 23007 Type
 23008 Key
 23009 Device number by license
+23010 Id Product
+23011 GUID
+23012 Install
+23013 Note
