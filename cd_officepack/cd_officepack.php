@@ -36,6 +36,10 @@ $list_fields=array( $l->g(23005) => 'PRODUCT',
 $l->g(23006) => 'OFFICEVERSION',
 $l->g(23007) => 'TYPE',
 $l->g(23008) => 'OFFICEKEY',
+$l->g(23010) => 'PRODUCTID',
+$l->g(23011) => 'GUID',
+$l->g(23012) => 'INSTALL',
+$l->g(23013) => 'NOTE'
 );
 
 $list_col_cant_del=$list_fields;

@@ -8,4 +8,7 @@
 23007 Type
 23008 Clé
 23009 Nombre de machines par licence
-
+23010 Id Produit
+23011 GUID
+23012 Installation
+23013 Note
