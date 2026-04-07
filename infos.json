@@ -3,7 +3,7 @@
   "author" : ["Guillaume PROTET"],
   "contributor" : ["Gilles DUBOIS", "Stephane PAUTREL", "Charlène AUGER", "Léa DROGUET"],
   "supportedAgent" : ["Windows"],
-  "version" : "3.4",
+  "version" : "3.5",
   "licence" : "GPLv2",
   "description" : {
     "fr" : "Remonte les clés Microsoft Office",
