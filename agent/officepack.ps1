@@ -109,10 +109,13 @@ Function getOfficeOSPPInfos
     $objOffice = @{}
     $index = 0
     $path = 'C:\Program Files (x86)\Microsoft Office\Office' + $version + '\OSPP.VBS'  
-    If ($osType -eq '64')
-    {
+   
+    if (Test-Path $path -PathType Leaf) {
+        Write-Host "The path $path exist."
+    }else {
+        Write-Host "The path $path does not exist."
         $path = 'C:\Program Files\Microsoft Office\Office' + $version + '\OSPP.VBS'
-    }
+    } 
     cscript.exe  $path /dstatus > $env:USERPROFILE\output.txt
     If (Test-Path $env:USERPROFILE\output.txt -PathType Leaf)
     {
@@ -298,11 +301,16 @@ Function schKey
         $oOfficeOSPPInfos.Length -gt 0
     )
     {
-        $oProd = $oOfficeOSPPInfos[0]['LicenseName']
+        If ($oOfficeOSPPInfos[0] -ne $null -and $oOfficeOSPPInfos.Length -gt 0) {
+            $oProd = $oOfficeOSPPInfos[0]['LicenseName']
+        }
+        Else{
+            $oProd = $oOfficeOSPPInfos['LicenseName']
+        }
     }
     If ($oProd.Length -eq 0)
     {
-        $oProd = 'Unidentifiable Office' + $oVer
+        $oProd = 'Unidentifiable Office ' + $oVer
     }
     If ($oProdID -ine 'No ProductID')
     {
@@ -311,7 +319,7 @@ Function schKey
             $oProd = $oProd + ' OEM'
         }
     }
-    If ($oProd -match 'Microsoft Office [\s\S]+? ' + $oVer)
+    If ($oProd -match 'Office' -and $oProd -notmatch ('Unidentifiable Office ' + [regex]::Escape($oVer)))
     {
         writeXML -oVer $oVer -oProd $oProd -oProdID $oProdID -oBit $osType -oGUID $oGUID -oInstall $oInstall -oKey $oKey -oNote $oNote
     }
